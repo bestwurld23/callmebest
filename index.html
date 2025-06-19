@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>callmebest.com // Jordan Bester</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,12 +47,48 @@
             pointer-events: none;
             transition: opacity 0.3s;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+            .max-w-2xl {
+                padding: 1rem !important;
+            }
+            
+            .project-description {
+                margin-left: 0;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .music-disco {
+                padding: 1rem !important;
+            }
+
+            .music-disco iframe {
+                height: 300px !important;
+            }
+
+            .info-wave {
+                margin: 1rem 0;
+                padding: 1.5rem !important;
+            }
+
             .floating-sticker {
-                width: 60px;
-                top: 8px;
-                left: 8px;
-                opacity: 0.18;
+                width: 50px;
+                top: 12px;
+                left: 12px;
+                opacity: 0.25;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 1.5rem !important;
+            }
+
+            .music-disco iframe {
+                height: 250px !important;
             }
         }
     </style>
@@ -67,7 +103,7 @@
         </header>
 
         <!-- Floating sticker image near the top left -->
-        <img src="Downloads/floating-me.png" alt="Typing Sticker" class="floating-sticker" />
+        <img src="images/floating-me.png" alt="Typing Sticker" class="floating-sticker" />
 
         <div class="mt-6 mb-12 info-wave p-6 rounded-lg shadow text-base text-gray-200">
             I'm Jordan Bester, a multi-hyphenate executive who curates and designs experiences to inform and empower communities around emerging tech and beyond. Based in Chicago, I bring strategy, creativity, and impact to every speaking, consulting, and community-building opportunity.<br><br>
