@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>callmebest.com // Jordan Bester</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* A little transition for the description divs */
+        .project-description {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        .info-wave {
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            position: relative;
+            overflow: hidden;
+            animation: waveMove 6s ease-in-out infinite alternate;
+        }
+        @keyframes waveMove {
+            0% { transform: translateY(0px) skewY(-2deg); }
+            50% { transform: translateY(8px) skewY(2deg); }
+            100% { transform: translateY(0px) skewY(-2deg); }
+        }
+        .music-disco {
+            background: linear-gradient(135deg, #ff6ec4 0%, #7873f5 50%, #1fd1f9 100%);
+            background-size: 200% 200%;
+            animation: discoMove 5s ease-in-out infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+        @keyframes discoMove {
+            0% { background-position: 0% 50%; transform: translateY(0px) skewY(-2deg); }
+            50% { background-position: 100% 50%; transform: translateY(10px) skewY(2deg); }
+            100% { background-position: 0% 50%; transform: translateY(0px) skewY(-2deg); }
+        }
+        .floating-sticker {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            width: 100px;
+            opacity: 0.32;
+            filter: grayscale(30%) blur(0.5px);
+            z-index: 10;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .floating-sticker:hover {
+            opacity: 0.6;
+        }
+        @media (max-width: 768px) {
+            .max-w-2xl {
+                padding: 1rem !important;
+            }
+            
+            .project-description {
+                margin-left: 0;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .music-disco {
+                padding: 1rem !important;
+            }
+
+            .music-disco iframe {
+                height: 300px !important;
+            }
+
+            .info-wave {
+                margin: 1rem 0;
+                padding: 1.5rem !important;
+            }
+
+            .floating-sticker {
+                width: 50px;
+                top: 12px;
+                left: 12px;
+                opacity: 0.25;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 1.5rem !important;
+            }
+
+            .music-disco iframe {
+                height: 250px !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#111111] text-[#EAEAEA] font-mono antialiased">
+
+    <div class="max-w-2xl mx-auto p-8 md:p-12">
+
+        <header class="mb-2">
+            <h1 class="text-2xl font-bold">Jordan Bester</h1>
+            <a href="#" class="text-lg text-gray-400 hover:text-white transition-colors duration-300">callmebest.com</a>
+            <!-- Tagline -->
+            <div class="mt-2 text-yellow-300 text-lg font-semibold tracking-wide">Making Technology Cool</div>
+        </header>
+
+        <!-- Floating sticker image as a home button -->
+        <a href="/" title="Go to homepage">
+            <img src="images/floating-me.png" alt="Home" class="floating-sticker" />
+        </a>
+
+        <div class="mt-6 mb-12 info-wave p-6 rounded-lg shadow text-base text-gray-200">
+            I'm Jordan Bester, a multi-hyphenate executive who curates and designs experiences to inform and empower communities around emerging tech and beyond. Based in Chicago, I bring strategy, creativity, and impact to every speaking, consulting, and community-building opportunity.<br><br>
+            My current passions include AI, blockchain, energy, and 3D printing. If you want to connect or book a speaker who's all about innovation and real-world impact, let's talk.
+            <div class="mt-6">
+                <a href="https://calendly.com/jbesterchamber/30min?month=2025-06" target="_blank" rel="noopener noreferrer" class="inline-block bg-yellow-300 text-black font-bold py-2 px-6 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200">Book Time with Me</a>
+            </div>
+        </div>
+
+        <!-- Capabilities Statement -->
+        <section class="mb-12">
+            <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-4">Capabilities Statement</h2>
+            <div class="bg-gray-800 rounded-lg p-6 text-base text-gray-200 shadow">
+                <p>
+                    I blend technology, creativity, and entrepreneurship to solve real-world problems and empower communities. My expertise spans:
+                </p>
+                <ul class="list-disc mt-4 ml-6 space-y-1 text-gray-300">
+                    <li>AI & Machine Learning</li>
+                    <li>Renewable Energy & Solar Photovoltaics</li>
+                    <li>Electric Vehicles & Drones</li>
+                    <li>3D Printing & Product Design</li>
+                    <li>Photography & Visual Storytelling</li>
+                    <li>Python & Front-End Development</li>
+                    <li>Business Development & Entrepreneurship</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Wins & Achievements -->
+        <section class="mb-12">
+            <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-4">Wins & Achievements</h2>
+            <div class="bg-gray-800 rounded-lg p-6 text-base text-gray-200 shadow">
+                <ul class="list-disc mt-2 ml-6 space-y-4 text-gray-300">
+                    <li>
+                        <span class="font-semibold text-yellow-300">Secured $350K ARPA funds</span> for Joy of Bethlehem Apostolic Church to support community initiatives.
+                    </li>
+                    <li>
+                        <span class="font-semibold text-yellow-300">Built the Future of Commerce Summit:</span> Raised $10K+ and facilitated conversations on emerging tech for underserved communities.
+                    </li>
+                    <li>
+                        <span class="font-semibold text-yellow-300">Founded Wagu:</span> Helped creators reach their goals, won multiple grants to reduce youth violence, and launched the 1/1 T-shirt Bar—a unique, AI-powered creative experience.
+                    </li>
+                    <li>
+                        <span class="font-semibold text-yellow-300">Launched Englewood Shared Renewables:</span> Developed a pre-apprenticeship program accredited by NABCEP and NCCER, creating new construction and energy professionals annually.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Proof of Work -->
+        <section class="mb-12">
+            <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-4">Proof of Work</h2>
+            <div class="bg-gray-800 rounded-lg p-6 text-base text-gray-200 shadow">
+                <ul class="list-disc mt-2 ml-6 space-y-4 text-gray-300">
+                    <li>
+                        <span class="font-semibold text-yellow-300">Client Testimonials:</span> 
+                        <br>
+                        <span class="italic">"Jordan's vision and leadership helped us secure critical funding and launch our community programs." – Community Partner</span>
+                    </li>
+                    <li>
+                        <span class="font-semibold text-yellow-300">Case Studies:</span>
+                        <ul class="list-disc ml-6 mt-2">
+                            <li><span class="font-semibold">Future of Commerce Summit:</span> Designed and executed a tech summit, resulting in $10K+ raised and new partnerships for local entrepreneurs.</li>
+                            <li><span class="font-semibold">Wagu 1/1 T-shirt Bar:</span> Developed a creative entrepreneurship program for youth, reducing violence and increasing engagement through tech-driven design.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="font-semibold text-yellow-300">Project Gallery:</span>
+                        <br>
+                        <span>See my <a href="#photography" class="underline text-blue-400 hover:text-yellow-300">Photography Portfolio</a> and <a href="#projects" class="underline text-blue-400 hover:text-yellow-300">Community Projects</a> below.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Lightroom Gallery Embed -->
+        <section class="mb-12" id="photography">
+            <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-4">Photography Portfolio</h2>
+            <div class="text-center">
+                <h3 class="text-lg font-semibold text-yellow-300 mb-2">FED Conference 2025</h3>
+                <p class="text-gray-400 mb-4">Latest work from WAGU STUDIOS</p>
+                <a
+                    href="https://adobe.ly/3EbvsIc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                >
+                    View Full Gallery on Adobe Lightroom →
+                </a>
+                <p class="mt-2 text-sm text-gray-500">45+ conference photos and videos</p>
+            </div>
+        </section>
+
+        <main>
+            <section class="mb-16" id="projects">
+                <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-4">Projects & Experiments</h2>
+                <ul class="text-lg space-y-2">
+                    <li>
+                        <a href="#" class="project-toggle inline-block hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200" data-target="#desc-foc">
+                           <span class="arrow mr-2">→</span>future of commerce
+                        </a>
+                        <div id="desc-foc" class="project-description hidden text-base text-gray-400 font-sans leading-relaxed mt-2 pl-8 pr-4 py-2 border-l-2 border-gray-700">
+                           <p class="font-bold text-gray-200">Headline: Building the Future of Commerce in Chicago</p>
+                           <p class="mt-2">As the founder and lead organizer, I envisioned and brought the Future of Commerce summit to life through my work with the Greater Englewood Chamber of Commerce. As a premier event during TECHICAGO WEEK, my goal was to create a unique platform that moves beyond theory and into action. I led the effort to convene a powerful mix of innovative vendors, public officials, small business owners, and community residents from across the country to Englewood. This summit is the culmination of my commitment to fostering economic opportunity by connecting emerging technology with grassroots entrepreneurship, building a collaborative blueprint for a more equitable and connected future.</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" class="project-toggle inline-block hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200" data-target="#desc-wagu">
+                           <span class="arrow mr-2">→</span>wagu
+                        </a>
+                        <div id="desc-wagu" class="project-description hidden text-base text-gray-400 font-sans leading-relaxed mt-2 pl-8 pr-4 py-2 border-l-2 border-gray-700">
+                           <p class="font-bold text-gray-200">Wagu: Empowering Creators in the Digital Economy</p>
+                           <p class="mt-2">Wagu is a creator development company that helps creators thrive through programming and tools in the digital economy. We are dedicated to building resources, platforms, and communities that enable creators to grow, monetize, and sustain their work in an ever-evolving digital landscape.</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" class="project-toggle inline-block hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200" data-target="#desc-noorish">
+                           <span class="arrow mr-2">→</span>noorish
+                        </a>
+                        <div id="desc-noorish" class="project-description hidden text-base text-gray-400 font-sans leading-relaxed mt-2 pl-8 pr-4 py-2 border-l-2 border-gray-700">
+                           <p class="font-bold text-gray-200">Noorish: Bridging Technology and Community</p>
+                           <p class="mt-2">Noorish is a company that translates emerging technology to communities and businesses alike, making innovation accessible and actionable for all.</p>
+                           <ul class="mt-4 ml-4 list-disc text-base text-gray-400">
+                               <li>
+                                   <span class="font-semibold text-gray-200">AI Workshops:</span> <span class="text-gray-400">We have led a variety of workshops including job development leveraging AI, menu generation for restaurants, and teaching creators how to create digital ebooks using AI. If you want to set up some time to connect, reach out to me at <a href="mailto:jordan@noorish.xyz" class="underline hover:text-yellow-300">jordan@noorish.xyz</a>.</span>
+                               </li>
+                           </ul>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-4">Writings</h2>
+                <ul class="space-y-4 text-lg">
+                    <li><a href="#" class="hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200">→ what im learning about economic security</a></li>
+                    <li><a href="#" class="hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200">→ I vibe coded this website...</a></li>
+                </ul>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-4">Music</h2>
+                <div class="music-disco p-12 rounded-xl text-center">
+                    <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="400" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/heavy-rotation-mix/pl.pm-20e9f373919da080383fe32c4b2b4605"></iframe>
+                    <p class="text-gray-100 mt-6 text-lg font-bold drop-shadow">This is what I'm currently playing.</p>
+                </div>
+            </section>
+        </main>
+        <footer class="border-t border-gray-700 pt-8">
+             <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-4">Connect</h2>
+             <ul class="space-y-4 text-lg flex flex-col md:flex-row md:space-y-0 md:space-x-8 justify-center">
+                <li>
+                    <a href="https://www.instagram.com/bestwurld/#" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 hover:text-yellow-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 3.25a5.25 5.25 0 1 1 0 10.5a5.25 5.25 0 0 1 0-10.5zm0 1.5a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5zm5.25.75a1 1 0 1 1 0 2a1 1 0 0 1 0-2z"/></svg>
+                        <span>Instagram</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://x.com/best_eth" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 hover:text-yellow-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 2.47a2.75 2.75 0 0 1 3.88 3.88l-5.2 5.2l5.2 5.2a2.75 2.75 0 0 1-3.88 3.88l-5.2-5.2l-5.2 5.2a2.75 2.75 0 0 1-3.88-3.88l5.2-5.2l-5.2-5.2A2.75 2.75 0 0 1 6.13 2.47l5.2 5.2l5.2-5.2z"/></svg>
+                        <span>X (Twitter)</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/jordan-bester-85664259" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 hover:text-yellow-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.25c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.25h-3v-5.5c0-1.381-1.119-2.5-2.5-2.5s-2.5 1.119-2.5 2.5v5.5h-3v-10h3v1.5c.879-1.316 2.634-1.5 3.5-1.5 2.485 0 4.5 2.015 4.5 4.5v5.5z"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                </li>
+             </ul>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectToggles = document.querySelectorAll('.project-toggle');
+
+            projectToggles.forEach(toggle => {
+                toggle.addEventListener('click', (event) => {
+                    event.preventDefault(); // Stop the link from trying to navigate away
+
+                    const targetId = toggle.getAttribute('data-target');
+                    const targetDescription = document.querySelector(targetId);
+                    const targetArrow = toggle.querySelector('.arrow');
+
+                    // Check if the clicked item is already open
+                    const isAlreadyOpen = !targetDescription.classList.contains('hidden');
+
+                    // First, close all open descriptions and reset their arrows
+                    document.querySelectorAll('.project-description').forEach(desc => {
+                        desc.classList.add('hidden'); 
+                    });
+                    document.querySelectorAll('.arrow').forEach(arrow => {
+                        arrow.textContent = '→';
+                    });
+
+                    // If the clicked item was NOT already open, open it and change its arrow
+                    if (!isAlreadyOpen) {
+                        targetDescription.classList.remove('hidden');
+                        targetArrow.textContent = '↓';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
