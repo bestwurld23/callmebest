@@ -16,12 +16,12 @@ export default function Home() {
           <div className="text-center space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900">
-                Power Your Future with
-                <span className="text-orange-500 block">Clean Solar Energy</span>
+                Maximize Your Solar with
+                <span className="text-orange-500 block">Professional Panel Cleaning</span>
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Transform your home with sustainable solar solutions and unlock the potential of AI technology. 
-                Join thousands of homeowners saving money while protecting the environment.
+                Keep your solar panels operating at peak efficiency with our advanced drone and human cleaning services. 
+                Join thousands of solar owners maximizing their energy production and ROI.
               </p>
             </div>
             
@@ -30,7 +30,7 @@ export default function Home() {
               <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3">
                 <Link href="/quote">
                   <Sun className="mr-2 h-5 w-5" />
-                  Get Solar Quote
+                  Get Cleaning Quote
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="px-8 py-3">
@@ -52,7 +52,7 @@ export default function Home() {
               Why Choose Noorish?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We combine cutting-edge solar technology with AI-powered solutions to maximize your savings and efficiency.
+              We combine advanced drone technology with expert human cleaning to maximize your solar panel efficiency and energy production.
             </p>
           </div>
           
@@ -62,11 +62,11 @@ export default function Home() {
                 <div className="mx-auto w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
                   <Zap className="h-6 w-6 text-orange-500" />
                 </div>
-                <CardTitle>Maximum Efficiency</CardTitle>
+                <CardTitle>Advanced Drone Cleaning</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Our premium solar panels deliver up to 22% efficiency, ensuring maximum energy production from every ray of sunlight.
+                  Our state-of-the-art drones provide precision cleaning for hard-to-reach panels, ensuring maximum efficiency and safety without ladders or scaffolding.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -76,11 +76,11 @@ export default function Home() {
                 <div className="mx-auto w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                   <TrendingUp className="h-6 w-6 text-green-500" />
                 </div>
-                <CardTitle>Proven Savings</CardTitle>
+                <CardTitle>Proven Results</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Save up to 90% on your electricity bills with our optimized solar solutions and smart energy management systems.
+                  Increase your solar panel efficiency by up to 25% with regular professional cleaning. Clean panels generate more energy and save you more money.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -90,11 +90,11 @@ export default function Home() {
                 <div className="mx-auto w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                   <Users className="h-6 w-6 text-blue-500" />
                 </div>
-                <CardTitle>Expert Support</CardTitle>
+                <CardTitle>Expert Human Care</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  From consultation to installation and beyond, our certified experts provide comprehensive support every step of the way.
+                  Our trained technicians provide meticulous hand cleaning for delicate panels and detailed inspection services to ensure optimal performance.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -106,15 +106,15 @@ export default function Home() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-            Ready to Start Your Solar Journey?
+            Ready to Maximize Your Solar Performance?
           </h2>
           <p className="text-xl text-gray-600">
-            Get a personalized quote in minutes or learn how AI can transform your business.
+            Get a personalized cleaning quote in minutes or learn how AI can transform your business.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600">
               <Link href="/quote">
-                Get Free Quote
+                Get Free Cleaning Quote
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
