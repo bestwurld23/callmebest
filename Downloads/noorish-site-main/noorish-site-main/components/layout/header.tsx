@@ -44,7 +44,7 @@ export function Header() {
               href="/quote" 
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
-              Cleaning Quote
+              Drone Services
             </Link>
             <Link 
               href="/workshops" 

@@ -10,8 +10,8 @@ import { Header } from '@/components/layout/header';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Noorish - Solar Panel Cleaning & AI Solutions',
-  description: 'Maximize your solar panel efficiency with professional drone and human cleaning services, plus AI technology solutions.',
+  title: 'Noorish - Building America\'s Smartest Blocks',
+  description: 'Autonomous drone services, community tech workshops, and innovative products for the neighborhoods of tomorrow. Serving Chicago suburbs with smart community solutions.',
 };
 
 export default function RootLayout({
