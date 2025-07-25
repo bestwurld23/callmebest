@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Drone, Lightbulb, ShoppingCart, ArrowRight, Zap, Users, Wrench, CheckCircle } from 'lucide-react'
+import { Plane, Lightbulb, ShoppingCart, ArrowRight, Zap, Users, Wrench, CheckCircle } from 'lucide-react'
 
 export default function Home() {
   return (
@@ -38,7 +38,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8 py-3">
                 <Link href="/quote">
-                  <Drone className="mr-2 h-5 w-5" />
+                  <Plane className="mr-2 h-5 w-5" />
                   Book Drone Service
                 </Link>
               </Button>
@@ -75,7 +75,7 @@ export default function Home() {
             <Card className="text-center">
               <CardHeader>
                 <div className="mx-auto w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Drone className="h-6 w-6 text-blue-600" />
+                  <Plane className="h-6 w-6 text-blue-600" />
                 </div>
                 <CardTitle>Residential Roofs</CardTitle>
               </CardHeader>
@@ -244,7 +244,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
               <Link href="/quote">
-                <Drone className="mr-2 h-5 w-5" />
+                <Plane className="mr-2 h-5 w-5" />
                 Book Drone Service
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
