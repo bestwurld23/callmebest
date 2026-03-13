@@ -174,9 +174,20 @@ class LuzGame {
     this._bindInput();
     this._bindUI();
     this._checkMobile();
+    this._scaleGame();
+    window.addEventListener('resize', () => this._scaleGame());
 
     this.lastTime = 0;
     this.running = false;
+  }
+
+  // ── RESPONSIVE SCALING ────────────────────────────────────────
+  _scaleGame() {
+    const container = document.getElementById('game-container');
+    const scaleX = window.innerWidth  / 800;
+    const scaleY = window.innerHeight / 600;
+    const scale  = Math.min(scaleX, scaleY) * 0.98;
+    container.style.transform = `scale(${scale})`;
   }
 
   // ── INIT ──────────────────────────────────────────────────────
@@ -228,12 +239,18 @@ class LuzGame {
   }
 
   _checkMobile() {
-    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ||
-                     window.innerWidth <= 820;
     const controls = document.getElementById('mobile-controls');
-    if (isMobile && controls) {
-      controls.classList.add('visible');
-      this._bindDpad(controls);
+    if (controls) this._bindDpad(controls);
+    // Visibility controlled by _setGameplayMode() — not here
+  }
+
+  // Show/hide mobile controls by toggling .gameplay on the container
+  _setGameplayMode(active) {
+    const container = document.getElementById('game-container');
+    if (active) {
+      container.classList.add('gameplay');
+    } else {
+      container.classList.remove('gameplay');
     }
   }
 
@@ -274,6 +291,7 @@ class LuzGame {
     this.audio.stopBgBeat();
     this._showOnly('world-map-screen');
     this._renderWorldMap();
+    this._setGameplayMode(false);
   }
 
   _startWorld(worldIndex) {
@@ -293,6 +311,7 @@ class LuzGame {
     this.luz = new Luz(this.canvas);
     this.state = STATE.PLAYING;
     this._showOnly(null);
+    this._setGameplayMode(true);
     document.getElementById('pause-banner').style.display = 'none';
     this.audio.startBgBeat(worldIndex);
   }
@@ -378,6 +397,7 @@ class LuzGame {
     this.audio.stopBgBeat();
     this.audio.victory();
     this._showOnly('end-screen');
+    this._setGameplayMode(false);
 
     const iq = getEnergyIQ();
     document.getElementById('end-title').textContent = '⚡ COMUNIDAD LIBERADA ⚡';
@@ -394,6 +414,7 @@ class LuzGame {
     this.state = STATE.GAME_OVER;
     this.audio.stopBgBeat();
     this._showOnly('end-screen');
+    this._setGameplayMode(false);
 
     const iq = getEnergyIQ();
     document.getElementById('end-title').textContent = 'GRID DOWN';
