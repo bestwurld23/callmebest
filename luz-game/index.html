@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>LUZ — Energy Ranger | callmebest.com</title>
+  <meta name="description" content="2 in 3 Americans can't explain the difference between clean and dirty energy. Play LUZ and prove you're the exception." />
+  <meta property="og:title" content="LUZ — Energy Ranger" />
+  <meta property="og:description" content="They kept us in the dark. She brought the light. Play now at callmebest.com" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="luz-standalone">
+
+<div id="game-container">
+
+  <!-- ═══════════════════════════════════════════════════
+       CANVAS
+  ═══════════════════════════════════════════════════ -->
+  <canvas id="game-canvas" width="800" height="600"></canvas>
+
+  <!-- ═══════════════════════════════════════════════════
+       TITLE SCREEN
+  ═══════════════════════════════════════════════════ -->
+  <div id="title-screen" class="overlay">
+    <div class="title-main">LUZ</div>
+    <div class="title-sub">Energy Ranger</div>
+
+    <div class="title-story">
+      The island went dark. Not just from the hurricane —<br>
+      from decades of corruption and colonial debt.<br>
+      <strong style="color:#00FF87">Luz trained as an Energy Ranger. Now she fights back.</strong>
+    </div>
+
+    <div class="stat-callout">
+      "2 in 3 Americans can't explain the difference between clean and dirty energy."<br>
+      <span style="color:#888;font-size:11px">— PLAY LUZ. PROVE YOU'RE THE EXCEPTION.</span>
+    </div>
+
+    <button id="btn-start" class="btn">PLAY NOW ⚡</button>
+
+    <div style="margin-top:20px;font-size:11px;color:#444;letter-spacing:2px">
+      ARROW KEYS / WASD — MOVE &nbsp;|&nbsp; SPACE — SHOOT &nbsp;|&nbsp; SHIFT — SHIELD &nbsp;|&nbsp; ESC — PAUSE
+    </div>
+    <div style="margin-top:8px;font-size:10px;color:#333">
+      <a href="../index.html" style="color:#444;text-decoration:none">← callmebest.com</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       WORLD MAP
+  ═══════════════════════════════════════════════════ -->
+  <div id="world-map-screen" class="overlay hidden">
+    <h2>SELECT WORLD</h2>
+    <div class="map-sub">Choose your community. Fight for the grid.</div>
+    <div class="world-grid" id="world-nodes">
+      <!-- Populated by JS -->
+    </div>
+    <div style="margin-top:20px;font-size:11px;color:#444">
+      <a href="../index.html" style="color:#444;text-decoration:none">← Back to callmebest.com</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       KNOWLEDGE CARD
+  ═══════════════════════════════════════════════════ -->
+  <div id="knowledge-card" class="overlay hidden">
+    <div class="card-box slide-up">
+      <div class="card-label">⚡ Energy Intelligence Card Unlocked</div>
+      <div class="card-icon" id="card-icon">⚡</div>
+      <div class="card-fact" id="card-fact"></div>
+      <div class="card-location" id="card-location"></div>
+      <div style="font-size:12px;color:#555;margin-bottom:20px" id="card-count"></div>
+      <div class="card-actions">
+        <button id="btn-card-collect" class="btn btn-gold">Add to My Deck</button>
+        <button id="btn-card-continue" class="btn">Continue ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       END SCREEN (Victory + Game Over)
+  ═══════════════════════════════════════════════════ -->
+  <div id="end-screen" class="overlay hidden">
+    <div class="end-title" id="end-title"></div>
+    <div class="iq-score" id="iq-score"></div>
+    <div class="iq-label" id="iq-label">Energy IQ Score</div>
+    <div class="end-cta" id="end-cta"></div>
+    <div style="font-size:14px;color:#FFD700;margin-bottom:20px" id="end-score"></div>
+
+    <div style="font-size:12px;color:#666;margin-bottom:20px;max-width:400px;text-align:center">
+      Join the energy literate. Your community needs you.<br>
+      <a href="https://callmebest.com" target="_blank"
+         style="color:#00FF87;text-decoration:none;font-weight:bold">callmebest.com →</a>
+    </div>
+
+    <div class="end-actions">
+      <button id="btn-play-again" class="btn">Play Again</button>
+      <button id="btn-share" class="btn btn-gold">Share My Score ⚡</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PAUSE BANNER
+  ═══════════════════════════════════════════════════ -->
+  <div id="pause-banner">PAUSED</div>
+
+  <!-- ═══════════════════════════════════════════════════
+       MOBILE CONTROLS
+  ═══════════════════════════════════════════════════ -->
+  <div id="mobile-controls">
+    <div class="dpad">
+      <div></div>
+      <div class="dpad-btn dpad-up"    data-dir="up">↑</div>
+      <div></div>
+      <div class="dpad-btn dpad-left"  data-dir="left">←</div>
+      <div class="dpad-btn dpad-center"></div>
+      <div class="dpad-btn dpad-right" data-dir="right">→</div>
+      <div></div>
+      <div class="dpad-btn dpad-down"  data-dir="down">↓</div>
+      <div></div>
+    </div>
+    <div class="action-buttons">
+      <button class="action-btn" id="btn-shoot">SHOOT<br>⚡</button>
+      <button class="action-btn" id="btn-shield">SHIELD<br>🛡</button>
+    </div>
+  </div>
+
+</div><!-- /game-container -->
+
+<!-- Scripts (order matters) -->
+<script src="literacy.js"></script>
+<script src="levels.js"></script>
+<script src="characters.js"></script>
+<script src="game.js"></script>
+
+</body>
+</html>
