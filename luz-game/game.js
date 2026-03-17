@@ -188,7 +188,7 @@ class LuzGame {
     const container = document.getElementById('game-container');
     const scaleX = window.innerWidth  / 800;
     const scaleY = window.innerHeight / 600;
-    const scale  = Math.min(scaleX, scaleY) * 0.98;
+    const scale  = Math.min(scaleX, scaleY); // fill viewport fully
     container.style.transform = `scale(${scale})`;
   }
 
@@ -237,6 +237,22 @@ class LuzGame {
 
     // Mid-level quiz
     document.getElementById('btn-quiz-continue').addEventListener('click', () => this._quizContinue());
+
+    // Mobile: tap anywhere on overlay to continue (once result is showing)
+    document.getElementById('quiz-overlay').addEventListener('click', e => {
+      const continueBtn = document.getElementById('btn-quiz-continue');
+      if (!continueBtn.classList.contains('hidden') && e.target !== continueBtn) {
+        this._quizContinue();
+      }
+    });
+    document.getElementById('knowledge-card').addEventListener('click', e => {
+      const continueBtn = document.getElementById('btn-card-continue');
+      const collectBtn  = document.getElementById('btn-card-collect');
+      if (!continueBtn.classList.contains('hidden') &&
+          e.target !== continueBtn && e.target !== collectBtn) {
+        this._cardContinue();
+      }
+    });
 
     // End screen
     document.getElementById('btn-play-again').addEventListener('click', () => this._playAgain());

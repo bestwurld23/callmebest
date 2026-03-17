@@ -224,17 +224,21 @@ body.luz-standalone {
 #knowledge-card {
   background: rgba(10,10,26,0.96);
   backdrop-filter: blur(8px);
-  padding: 20px;
+  padding: 16px;
+  justify-content: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #knowledge-card .card-box {
   background: linear-gradient(135deg, #0d1a10 0%, #0a1520 100%);
   border: 2px solid var(--green);
   border-radius: 16px;
-  padding: 32px 36px;
+  padding: 24px 28px;
   max-width: 540px;
   width: 100%;
   box-shadow: 0 0 40px #00FF8722;
+  margin: auto;
 }
 
 #knowledge-card .card-label {
@@ -277,17 +281,35 @@ body.luz-standalone {
 #quiz-overlay {
   background: rgba(10,10,26,0.97);
   backdrop-filter: blur(10px);
-  padding: 20px;
+  padding: 16px;
+  justify-content: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .quiz-box {
   background: linear-gradient(135deg, #0d1a10 0%, #0a0a1a 100%);
   border: 2px solid var(--gold);
   border-radius: 16px;
-  padding: 32px 36px;
+  padding: 24px 28px;
   max-width: 560px;
   width: 100%;
   box-shadow: 0 0 50px #FFD70022, 0 0 100px #00FF8711;
+  margin: auto;
+}
+
+/* Mobile tap hint — shows below result, above continue button */
+.tap-hint {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 12px;
+  animation: pulse-opacity 1.5s ease-in-out infinite;
+}
+@keyframes pulse-opacity {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.7; }
 }
 
 .quiz-label {
