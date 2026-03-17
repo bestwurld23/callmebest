@@ -61,6 +61,60 @@ const worldFacts = [
   { world: 5, location: "Washington, D.C.",    fact: energyFacts[17], icon: "🏛️" }  // 2 in 3 Americans stat
 ];
 
+// ── MID-GAME QUIZ BANK ───────────────────────────────────────────────────
+// One quiz per world, triggered at the halfway point of each level
+const worldQuizzes = [
+  {
+    world: 1,
+    location: "Loíza, Puerto Rico",
+    question: "Puerto Rico gets more sunlight than Germany. How much MORE solar power does Germany have?",
+    options: ["2x more", "5x more", "10x more"],
+    correct: 2, // index 0-based
+    fact: "Puerto Rico gets more sun than Germany — yet Germany has 10x more solar installed. That's not geography. That's politics and investment.",
+    reward: "☀️ Solar Boost! +500 Watts"
+  },
+  {
+    world: 2,
+    location: "Englewood, Chicago",
+    question: "Black neighborhoods install significantly less rooftop solar than average. By how much?",
+    options: ["About 30% less", "About 50% less", "About 69% less"],
+    correct: 2,
+    fact: "Black neighborhoods install 69% less rooftop solar than average — even when income is equal. This is called the solar equity gap.",
+    reward: "⚡ Community Power! +500 Watts"
+  },
+  {
+    world: 3,
+    location: "Houston, Texas",
+    question: "How much MORE of their income do low-income Black households spend on energy vs. white households?",
+    options: ["15% more", "29% more", "43% more"],
+    correct: 2,
+    fact: "Low-income Black households spend 43% more of their income on energy. Clean energy isn't just climate — it's economic justice.",
+    reward: "🔋 Grid Justice! +500 Watts"
+  },
+  {
+    world: 4,
+    location: "Navajo Nation",
+    question: "What is the fastest growing job in America through 2034?",
+    options: ["Solar installer", "Wind turbine technician", "EV battery engineer"],
+    correct: 1,
+    fact: "Wind turbine technician is the #1 fastest growing job in America through 2034. The clean energy economy is hiring — right now.",
+    reward: "🌬️ Wind Power! +500 Watts"
+  },
+  {
+    world: 5,
+    location: "Washington, D.C.",
+    question: "How many new clean energy workers does the U.S. need by 2030?",
+    options: ["50,000+", "500,000+", "5,000,000+"],
+    correct: 1,
+    fact: "The U.S. needs 500,000+ new clean energy workers by 2030. The opportunity is massive — and communities like yours need to be first in line.",
+    reward: "🏛️ Policy Win! +500 Watts"
+  }
+];
+
+function getWorldQuiz(worldIndex) {
+  return worldQuizzes[worldIndex] || worldQuizzes[0];
+}
+
 // Cards collected by player (indices into energyFacts)
 const collectedCards = new Set();
 

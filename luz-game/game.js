@@ -135,6 +135,7 @@ const STATE = {
   WORLD_MAP: 'worldmap',
   PLAYING: 'playing',
   BOSS: 'boss',
+  QUIZ: 'quiz',
   KNOWLEDGE_CARD: 'card',
   PAUSED: 'paused',
   GAME_OVER: 'gameover',
@@ -170,6 +171,7 @@ class LuzGame {
     this.mobileInput = { up: false, down: false, left: false, right: false, shoot: false, shield: false };
 
     this.pendingCard = null;
+    this.floatingTexts = [];
 
     this._bindInput();
     this._bindUI();
@@ -232,6 +234,9 @@ class LuzGame {
     // Knowledge card buttons
     document.getElementById('btn-card-collect').addEventListener('click', () => this._collectCard());
     document.getElementById('btn-card-continue').addEventListener('click', () => this._cardContinue());
+
+    // Mid-level quiz
+    document.getElementById('btn-quiz-continue').addEventListener('click', () => this._quizContinue());
 
     // End screen
     document.getElementById('btn-play-again').addEventListener('click', () => this._playAgain());
@@ -309,6 +314,8 @@ class LuzGame {
     this.scrollX = 0;
 
     this.luz = new Luz(this.canvas);
+    this.floatingTexts = [];
+    this._quizShownThisWorld = false;
     this.state = STATE.PLAYING;
     this._showOnly(null);
     this._setGameplayMode(true);
@@ -327,6 +334,81 @@ class LuzGame {
       document.getElementById('pause-banner').style.display = 'block';
       this.audio.stopBgBeat();
     }
+  }
+
+  // ── MID-LEVEL QUIZ ─────────────────────────────────────────────
+  _triggerQuiz() {
+    this._prevState = this.state;
+    this.state = STATE.QUIZ;
+    this.audio.stopBgBeat();
+
+    const quiz = getWorldQuiz(this.currentWorld);
+    document.getElementById('quiz-location').textContent = `📍 ${quiz.location}`;
+    document.getElementById('quiz-question').textContent = quiz.question;
+
+    const optionsEl = document.getElementById('quiz-options');
+    optionsEl.innerHTML = '';
+    quiz.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => this._answerQuiz(i, quiz));
+      optionsEl.appendChild(btn);
+    });
+
+    document.getElementById('quiz-result').classList.add('hidden');
+    document.getElementById('btn-quiz-continue').classList.add('hidden');
+    document.getElementById('quiz-overlay').classList.remove('hidden');
+    this._showOnly('quiz-overlay');
+  }
+
+  _answerQuiz(chosen, quiz) {
+    // Disable all buttons
+    document.querySelectorAll('.quiz-option').forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === quiz.correct) btn.classList.add('correct');
+      else if (i === chosen && i !== quiz.correct) btn.classList.add('wrong');
+    });
+
+    const correct = chosen === quiz.correct;
+    const resultEl = document.getElementById('quiz-result');
+    resultEl.classList.remove('hidden');
+
+    if (correct) {
+      // ⚡ HEALTH REWARD for correct answer
+      this.luz.heal(1);
+      createHealthGainEffect(
+        this.luz.x + this.luz.w / 2,
+        this.luz.y + this.luz.h / 2,
+        this.particles
+      );
+      this.floatingTexts.push(new FloatingText(
+        this.luz.x + this.luz.w / 2,
+        this.luz.y - 20,
+        '+1 ⚡ SOLAR CHARGE!',
+        '#00FF87', 20
+      ));
+      this.score += 500;
+      document.getElementById('quiz-result-icon').textContent = '✅';
+      document.getElementById('quiz-result-msg').textContent = '¡Wepa! Correct! +1 Health + 500 Watts!';
+      document.getElementById('quiz-result-msg').style.color = '#00FF87';
+      this.audio.collectOrb();
+    } else {
+      document.getElementById('quiz-result-icon').textContent = '❌';
+      document.getElementById('quiz-result-msg').textContent = 'Not quite — but now you know!';
+      document.getElementById('quiz-result-msg').style.color = '#FF3366';
+    }
+
+    document.getElementById('quiz-fact-reveal').textContent = `⚡ ${quiz.fact}`;
+    document.getElementById('quiz-reward').textContent = correct ? quiz.reward : '';
+    document.getElementById('btn-quiz-continue').classList.remove('hidden');
+  }
+
+  _quizContinue() {
+    document.getElementById('quiz-overlay').classList.add('hidden');
+    this.state = STATE.PLAYING;
+    this.audio.startBgBeat(this.currentWorld);
+    this._showOnly(null);
   }
 
   _triggerBoss() {
@@ -480,7 +562,8 @@ class LuzGame {
   _update(dt) {
     if (this.state === STATE.PAUSED || this.state === STATE.TITLE ||
         this.state === STATE.WORLD_MAP || this.state === STATE.KNOWLEDGE_CARD ||
-        this.state === STATE.GAME_OVER || this.state === STATE.VICTORY) return;
+        this.state === STATE.QUIZ || this.state === STATE.GAME_OVER ||
+        this.state === STATE.VICTORY) return;
 
     this.shake.update();
     this.scrollX += 1.5;
@@ -541,6 +624,10 @@ class LuzGame {
     this.particles = this.particles.filter(p => p.alive);
     this.particles.forEach(p => p.update());
 
+    // Update floating texts
+    this.floatingTexts = this.floatingTexts.filter(t => t.alive);
+    this.floatingTexts.forEach(t => t.update());
+
     // ── COLLISIONS ────────────────────────────────────────────
     const luzBounds = { x: this.luz.x + 8, y: this.luz.y + 8, w: this.luz.w - 16, h: this.luz.h - 16 };
 
@@ -552,11 +639,22 @@ class LuzGame {
           blast.x = -999; // remove blast
           const dead = enemy.takeDamage();
           if (dead) {
-            this._spawnExplosion(enemy.x + enemy.w / 2, enemy.y + enemy.h / 2);
+            enemy._dead = true;
+            const ex = enemy.x + enemy.w / 2;
+            const ey = enemy.y + enemy.h / 2;
+            this._spawnEnemyExplosion(ex, ey);
+            this.floatingTexts.push(new FloatingText(ex, ey - 10, `+${10 + this.currentWorld * 5}W`, '#FFD700', 16));
             this.audio.enemyDie();
             this.score += 10 + this.currentWorld * 5;
             this.enemiesKilled++;
             this.totalEnemiesKilled++;
+
+            // Trigger mid-level quiz at halfway point (once per world)
+            const halfway = Math.floor(this.enemiesNeeded / 2);
+            if (this.enemiesKilled === halfway && !this._quizShownThisWorld) {
+              this._quizShownThisWorld = true;
+              setTimeout(() => this._triggerQuiz(), 400);
+            }
           }
         }
       });
@@ -568,11 +666,13 @@ class LuzGame {
         this.shake.trigger(3, 8);
         const dead = this.boss.takeDamage();
         this.score += 25;
+        this.floatingTexts.push(new FloatingText(this.boss.x + this.boss.w / 2, this.boss.y - 20, '-1 HP', '#FF3366', 14));
         if (dead) this._bossDefeated();
       }
     });
 
-    // Remove hit blasts
+    // Remove dead enemies and hit blasts
+    this.enemies = this.enemies.filter(e => !e._dead);
     this.luz.blasts = this.luz.blasts.filter(b => !b._hit);
 
     // Enemy projectiles vs Luz
@@ -627,14 +727,23 @@ class LuzGame {
     }
   }
 
+  // Big enemy explosion with sparks + squares
+  _spawnEnemyExplosion(x, y) {
+    createEnemyExplosion(x, y, this.particles);
+  }
+
+  _spawnHealthGainEffect(x, y) {
+    createHealthGainEffect(x, y, this.particles);
+  }
+
   // ── RENDER ────────────────────────────────────────────────────
   _render() {
     const ctx = this.ctx;
     const { width: W, height: H } = this.canvas;
 
     if (this.state === STATE.TITLE || this.state === STATE.WORLD_MAP ||
-        this.state === STATE.KNOWLEDGE_CARD || this.state === STATE.GAME_OVER ||
-        this.state === STATE.VICTORY) {
+        this.state === STATE.KNOWLEDGE_CARD || this.state === STATE.QUIZ ||
+        this.state === STATE.GAME_OVER || this.state === STATE.VICTORY) {
       ctx.fillStyle = '#0A0A1A';
       ctx.fillRect(0, 0, W, H);
       return;
@@ -663,6 +772,9 @@ class LuzGame {
 
     // Particles
     this.particles.forEach(p => p.draw(ctx));
+
+    // Floating texts
+    this.floatingTexts.forEach(t => t.draw(ctx));
 
     // HUD
     this._drawHUD(ctx, W, H);

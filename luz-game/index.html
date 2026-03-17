@@ -37,6 +37,7 @@
     </div>
 
     <button id="btn-start" class="btn">PLAY NOW ⚡</button>
+    <button id="btn-glossary" class="btn btn-glossary" onclick="openGlossary()">📖 ENERGY GLOSSARY</button>
 
     <div style="margin-top:20px;font-size:11px;color:#444;letter-spacing:2px">
       ARROW KEYS / WASD — MOVE &nbsp;|&nbsp; SPACE — SHOOT &nbsp;|&nbsp; SHIFT — SHIELD &nbsp;|&nbsp; ESC — PAUSE
@@ -74,6 +75,25 @@
         <button id="btn-card-collect" class="btn btn-gold">Add to My Deck</button>
         <button id="btn-card-continue" class="btn">Continue ▶</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       MID-GAME QUIZ
+  ═══════════════════════════════════════════════════ -->
+  <div id="quiz-overlay" class="overlay hidden">
+    <div class="quiz-box slide-up">
+      <div class="quiz-label">⚡ ENERGY CHALLENGE — HALFWAY POINT</div>
+      <div class="quiz-location" id="quiz-location"></div>
+      <div class="quiz-question" id="quiz-question"></div>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-result hidden" id="quiz-result">
+        <div class="quiz-result-icon" id="quiz-result-icon"></div>
+        <div class="quiz-result-msg" id="quiz-result-msg"></div>
+        <div class="quiz-fact-reveal" id="quiz-fact-reveal"></div>
+        <div class="quiz-reward" id="quiz-reward"></div>
+      </div>
+      <button id="btn-quiz-continue" class="btn hidden">KEEP FIGHTING ▶</button>
     </div>
   </div>
 
@@ -127,7 +147,28 @@
 
 </div><!-- /game-container -->
 
+<!-- GLOSSARY OVERLAY — outside game-container so transform:scale doesn't trap it -->
+<div id="glossary-screen">
+  <div class="gs-header">
+    <div class="gs-title">⚡ ENERGY INTELLIGENCE DATABASE</div>
+    <input id="glossary-search" class="gs-search" type="text"
+      placeholder="Search terms, places, policies..."
+      oninput="handleGlossSearch(this.value)" />
+    <button class="gs-close" onclick="closeGlossary()">✕ EXIT</button>
+  </div>
+  <div class="gs-categories" id="gs-cats"></div>
+  <div class="gs-scroll-wrap">
+    <div class="gs-scanline"></div>
+    <div id="glossary-list" class="gs-list"></div>
+  </div>
+  <div class="gs-footer">
+    <span id="gs-count"></span>
+    <span class="gs-hint">HOVER TO PAUSE · CLICK TO EXPAND</span>
+  </div>
+</div>
+
 <!-- Scripts (order matters) -->
+<script src="glossary.js"></script>
 <script src="literacy.js"></script>
 <script src="levels.js"></script>
 <script src="characters.js"></script>

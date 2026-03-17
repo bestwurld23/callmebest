@@ -90,6 +90,10 @@ class Luz {
     return true;
   }
 
+  heal(amount = 1) {
+    this.hp = Math.min(this.maxHp, this.hp + amount);
+  }
+
   draw(ctx) {
     const cx = this.x + this.w / 2;
     const cy = this.y + this.h / 2;
@@ -657,36 +661,124 @@ class DonVoltio {
 
 // ── PARTICLE ─────────────────────────────────────────────────────
 class Particle {
-  constructor(x, y, color = '#00FF87') {
+  constructor(x, y, color = '#00FF87', opts = {}) {
     this.x = x;
     this.y = y;
-    const angle = Math.random() * Math.PI * 2;
-    const speed = 1 + Math.random() * 5;
+    const angle = opts.angle !== undefined ? opts.angle : Math.random() * Math.PI * 2;
+    const speed = opts.speed !== undefined ? opts.speed : (1 + Math.random() * 5);
     this.vx = Math.cos(angle) * speed;
     this.vy = Math.sin(angle) * speed;
     this.alpha = 1;
-    this.r = 2 + Math.random() * 4;
+    this.r = opts.r !== undefined ? opts.r : (2 + Math.random() * 4);
     this.color = color;
-    this.gravity = 0.08;
+    this.gravity = opts.gravity !== undefined ? opts.gravity : 0.08;
+    this.decay = opts.decay || 0.025;
+    this.shape = opts.shape || 'circle'; // 'circle' | 'spark' | 'square'
   }
 
   update() {
     this.x += this.vx;
     this.y += this.vy;
     this.vy += this.gravity;
-    this.alpha -= 0.025;
+    this.vx *= 0.97;
+    this.alpha -= this.decay;
     this.r *= 0.97;
   }
 
   get alive() { return this.alpha > 0; }
 
   draw(ctx) {
-    ctx.globalAlpha = this.alpha;
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, this.alpha);
     ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, Math.max(0.5, this.r), 0, Math.PI * 2);
-    ctx.fill();
-    ctx.globalAlpha = 1;
+
+    if (this.shape === 'spark') {
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(this.x - this.vx * 3, this.y - this.vy * 3);
+      ctx.stroke();
+    } else if (this.shape === 'square') {
+      ctx.fillRect(this.x - this.r / 2, this.y - this.r / 2, this.r, this.r);
+    } else {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, Math.max(0.5, this.r), 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+}
+
+// ── FLOATING TEXT ─────────────────────────────────────────────────
+class FloatingText {
+  constructor(x, y, text, color = '#FFD700', size = 18) {
+    this.x = x;
+    this.y = y;
+    this.text = text;
+    this.color = color;
+    this.size = size;
+    this.alpha = 1;
+    this.vy = -1.8;
+  }
+
+  update() {
+    this.y += this.vy;
+    this.alpha -= 0.018;
+  }
+
+  get alive() { return this.alpha > 0; }
+
+  draw(ctx) {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, this.alpha);
+    ctx.fillStyle = this.color;
+    ctx.font = `bold ${this.size}px Bebas Neue, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = this.color;
+    ctx.fillText(this.text, this.x, this.y);
+    ctx.restore();
+  }
+}
+
+// ── EXPLOSION HELPERS ─────────────────────────────────────────────
+function createEnemyExplosion(x, y, particleArray) {
+  const colors = ['#FF3366', '#FFD700', '#FF6600', '#FF3366', '#FFFFFF', '#8B0000'];
+  // 30-particle burst in all directions
+  for (let i = 0; i < 30; i++) {
+    const angle = (Math.PI * 2 / 30) * i + (Math.random() - 0.5) * 0.4;
+    const speed = 3 + Math.random() * 7;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const shape = Math.random() > 0.5 ? 'spark' : 'circle';
+    particleArray.push(new Particle(x, y, color, {
+      angle, speed,
+      r: 2 + Math.random() * 5,
+      gravity: 0.12,
+      decay: 0.02 + Math.random() * 0.025,
+      shape
+    }));
+  }
+  // 8 square chunks flying outward
+  for (let i = 0; i < 8; i++) {
+    const angle = (Math.PI * 2 / 8) * i;
+    particleArray.push(new Particle(x, y, '#FFD700', {
+      angle, speed: 5 + Math.random() * 4,
+      r: 6, gravity: 0.15, decay: 0.04, shape: 'square'
+    }));
+  }
+}
+
+function createHealthGainEffect(x, y, particleArray) {
+  // Rising green sparkles
+  for (let i = 0; i < 20; i++) {
+    const angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI;
+    particleArray.push(new Particle(
+      x + (Math.random() - 0.5) * 60,
+      y,
+      Math.random() > 0.4 ? '#00FF87' : '#FFD700',
+      { angle, speed: 1.5 + Math.random() * 2.5, r: 3 + Math.random() * 3, gravity: -0.08, decay: 0.018, shape: 'circle' }
+    ));
   }
 }
 
