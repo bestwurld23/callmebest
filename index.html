@@ -47,6 +47,9 @@
             pointer-events: none;
             transition: opacity 0.3s;
         }
+        .solar-embed iframe {
+            border-radius: 0 0 8px 8px;
+        }
         @media (max-width: 768px) {
             .max-w-2xl {
                 padding: 1rem !important;
@@ -138,17 +141,6 @@
                     </li>
 
                     <li>
-                        <a href="luz-game/index.html" target="_blank" class="inline-block hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200">
-                           <span class="mr-2">→</span>LUZ — Energy Ranger <span style="font-size:11px;color:#00FF87;font-family:monospace;margin-left:6px;">PLAY ⚡</span>
-                        </a>
-                        <div class="text-base text-gray-400 font-sans leading-relaxed mt-2 pl-8 pr-4 py-2 border-l-2 border-gray-700">
-                           <p class="font-bold text-gray-200">Browser game built for clean energy literacy</p>
-                           <p class="mt-2">LUZ is an arcade game where you play as Luz — an Energy Ranger from Loíza, Puerto Rico — fighting GridLock Corp across 5 communities. Every enemy defeated unlocks a real clean energy fact. Built to make solar education fun for students.</p>
-                           <p class="mt-2" style="font-size:12px;color:#555;font-style:italic">"2 in 3 Americans can't explain the difference between clean and dirty energy. Play LUZ. Prove you're the exception."</p>
-                        </div>
-                    </li>
-
-                    <li>
                         <a href="#" class="project-toggle inline-block hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200" data-target="#desc-noorish">
                            <span class="arrow mr-2">→</span>noorish
                         </a>
@@ -162,6 +154,39 @@
                            </ul>
                         </div>
                     </li>
+
+                    <li>
+                        <a href="#" class="project-toggle inline-block hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200" data-target="#desc-luz">
+                           <span class="arrow mr-2">→</span>luz — the energy game
+                        </a>
+                        <div id="desc-luz" class="project-description hidden text-base text-gray-400 font-sans leading-relaxed mt-2 pl-8 pr-4 py-2 border-l-2 border-gray-700">
+                           <p class="font-bold text-gray-200">Luz: Learn Energy Through Play</p>
+                           <p class="mt-2">Luz is an interactive energy literacy game designed to teach players — especially young people in underserved communities — how solar, wind, and clean energy systems work. Built to make the green economy feel accessible, exciting, and real.</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#" class="project-toggle inline-block hover:bg-yellow-300 hover:text-black p-1 transition-colors duration-200" data-target="#desc-solar4all">
+                           <span class="arrow mr-2">→</span>solar 4 all
+                        </a>
+                        <div id="desc-solar4all" class="project-description hidden text-base text-gray-400 font-sans leading-relaxed mt-2 border-l-2 border-gray-700" style="padding: 0;">
+                           <div class="pl-8 pr-4 py-2">
+                               <p class="font-bold text-gray-200">Solar 4 All: Built for the Block</p>
+                               <p class="mt-2 mb-4">A free solar sizing tool built for homes, businesses, and community spaces in Black and Brown neighborhoods. Enter your light bill or list your appliances — get a panel estimate, battery sizing, payback calculator, and every rebate and incentive you qualify for. No engineering degree required.</p>
+                               <a href="https://solar4all.xyz" target="_blank" rel="noopener noreferrer" class="inline-block bg-yellow-300 text-black font-bold py-2 px-4 rounded text-sm hover:bg-yellow-400 transition-colors duration-200 mb-4">Open Full Tool ↗</a>
+                           </div>
+                           <div style="position: relative; width: 100%; height: 600px; border-top: 1px solid #374151;">
+                               <iframe
+                                   src="https://solar4all.xyz"
+                                   style="width: 100%; height: 100%; border: none; display: block; background: #111827;"
+                                   title="Solar 4 All — Solar Sizing Tool"
+                                   loading="lazy"
+                                   allow="clipboard-write"
+                               ></iframe>
+                           </div>
+                        </div>
+                    </li>
+
                 </ul>
             </section>
 
